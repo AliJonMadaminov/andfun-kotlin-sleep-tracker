@@ -61,25 +61,19 @@ class SleepTrackerFragment : Fragment() {
 
         binding.sleepTrackerViewModel = sleepTrackerViewModel
 
-        // binding.setLifecycleOwner(this)
         binding.lifecycleOwner = this
 
-        
-
-        // Add an Observer on the state variable for showing a Snackbar message
-        // when the CLEAR button is pressed.
-        sleepTrackerViewModel.showSnackBarEvent.observe(viewLifecycleOwner, Observer {
-            if (it == true) { // Observed state is true.
+        sleepTrackerViewModel.showSnackbarEvent.observe(viewLifecycleOwner) { shouldShowSnackbar ->
+            if (shouldShowSnackbar) {
                 Snackbar.make(
-                        binding.root,
-                        getString(R.string.cleared_message),
-                        Snackbar.LENGTH_SHORT // How long to display the message.
+                    requireView(),
+                    getString(R.string.cleared_message),
+                    Snackbar.LENGTH_SHORT
                 ).show()
-                // Reset state to make sure the snackbar is only shown once, even if the device
-                // has a configuration change.
-                sleepTrackerViewModel.doneShowingSnackbar()
+
+                sleepTrackerViewModel.doneShowingSnackBar()
             }
-        })
+        }
 
         // Add an Observer on the state variable for Navigating when STOP button is pressed.
         sleepTrackerViewModel.navigateToSleepQuality.observe(viewLifecycleOwner, Observer { night ->
