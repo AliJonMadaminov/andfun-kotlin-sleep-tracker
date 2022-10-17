@@ -31,6 +31,7 @@ buildscript {
     }
 
     repositories {
+        mavenCentral()
         google()
         mavenCentral()
     }
@@ -48,8 +49,8 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
         mavenCentral()
+        google()
     }
 }
 

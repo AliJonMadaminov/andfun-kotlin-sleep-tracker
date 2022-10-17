@@ -31,6 +31,7 @@ import kotlinx.coroutines.*
  * ViewModel for SleepTrackerFragment.
  */
 class SleepTrackerViewModel(
+
     val database: SleepDatabaseDao,
     application: Application
 ) : AndroidViewModel(application) {
@@ -113,7 +114,6 @@ class SleepTrackerViewModel(
         }
         return night
     }
-
 
     private suspend fun clear() {
         database.clear()
